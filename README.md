@@ -12,6 +12,10 @@ This Project builds on [This Project](https://github.com/Fewnity/Counter-Strike-
 - Install [Visual Studio](https://visualstudio.microsoft.com/fr/downloads/)
 - Compile from **Visual Studio**
 
+### For Linux :
+- Install [Mono](https://www.mono-project.com/)
+- Run the **make.bat** in the project folder
+
 Note : To avoid coding collisions, path finding..., there is an Unity project to export code : https://github.com/Fewnity/Counter-Strike-DS-Unity-Project
 
 ## How to use :
@@ -20,6 +24,15 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 ### On Windows :
 - Launch **Counter Strike Server.exe**
 - Set your own restart system if the server crashs
+
+### On Linux :
+- Install [Tmux](https://doc.ubuntu-fr.org/tmux) if not installed (apt install tmux)
+- Set paths in **cs.server.service** and **start_cs_server.sh**
+- Put the **cs.server.service** file in **/etc/sustemd/system/**
+- Put the **start_cs_server.sh** in the server executable directory
+- Execute **"systemctl daemon-reload"**, **"systemctl enable cs.server"** and **"systemctl start cs.server"**
+- To access to the server console, write **"tmux attach-session -t cs_server"**
+- To quit the console without stoping the server : Ctrl + b then d
 
 Note : The used ip is automatically found by the server and showed in the console.
 
