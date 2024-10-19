@@ -44,7 +44,7 @@ namespace Counter_Strike_Server
             {
                 lock (ConnectionManager.allClients)
                 {
-                    List<Client> allClients = new();
+                    List<Client> allClients = new List<Client>();
                     try
                     {
                         allClients = new List<Client>(ConnectionManager.allClients);
@@ -53,7 +53,6 @@ namespace Counter_Strike_Server
                     {
                         UserInterfaceManager.PrintError($"{e.Message})\n{e.StackTrace.Replace("in ", "\nin ")}");
                     }
-                    //List<Client> allClients = new List<Client>(ConnectionManager.allClients);
                     int count = allClients.Count;
 
                     //For all client :
@@ -164,7 +163,7 @@ namespace Counter_Strike_Server
                 //For each party
                 lock (ConnectionManager.allClients)
                 {
-                    List<Client> allClients = new();
+                    List<Client> allClients = new List<Client>();
                     try
                     {
                         allClients = new List<Client>(ConnectionManager.allClients);

@@ -28,7 +28,7 @@ namespace Counter_Strike_Server
 
     public class Party
     {
-        public List<Client> allConnectedClients = new();
+        public List<Client> allConnectedClients = new List<Client>();
         public PartyCommunicator communicator;
         public bool isPrivate;
         public string password;
@@ -42,10 +42,10 @@ namespace Counter_Strike_Server
         public bool bombDropped;
         public mapEnum mapId;
         
-        public List<Physics.Grenade> allGrenades = new();
+        public List<Physics.Grenade> allGrenades = new List<Physics.Grenade>();
         
         //Bomb data
-        public Vector4 bombPosition = new (0,0,0,0);
+        public Vector4 bombPosition = new Vector4(0,0,0,0);
         public BoxCollisions defuseZoneCollisions;
 
         //Teams data
@@ -57,7 +57,7 @@ namespace Counter_Strike_Server
 
         public Party()
         {
-            communicator = new(this);
+            communicator = new PartyCommunicator(this);
         }
 
         #region Player management
@@ -122,7 +122,7 @@ namespace Counter_Strike_Server
         /// <param name="party"></param>
         public void SetBombForARandomPlayer()
         {
-            List<Client> allTerrorists = new();
+            List<Client> allTerrorists = new List<Client>();
 
             //Remove the bomb for all terrorists and add them in the allTerrorists list
             foreach (Client client in allConnectedClients)
@@ -304,7 +304,7 @@ namespace Counter_Strike_Server
                     else //If terrorists count equals counter terrorists count
                     {
                         //Put the player in a random team
-                        Random newRandom = new ();
+                        Random newRandom = new Random();
                         if (newRandom.Next(2) == 0)
                         {
                             CounterTerroristsCount++;
@@ -388,7 +388,7 @@ namespace Counter_Strike_Server
             {
                 //Get count
                 CheckTeamCount(out int terroristsCount, out int couterTerroristsCount);
-                Random rd = new();
+                Random rd = new Random();
 
                 while (Math.Abs(couterTerroristsCount - terroristsCount) >= 2)
                 {

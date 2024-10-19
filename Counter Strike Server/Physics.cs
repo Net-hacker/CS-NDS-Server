@@ -72,7 +72,7 @@ namespace Counter_Strike_Server
             public int id;
         }
 
-        public List<NE_Physics> allStaticPhysics = new();
+        public List<NE_Physics> allStaticPhysics = new List<NE_Physics>();
         public int NE_MIN_BOUNCE_SPEED = (int)(0.01f * (1 << 12));
 
 
@@ -86,11 +86,11 @@ namespace Counter_Strike_Server
 
         public static Grenade CreateGrenade(Client launcher, int id, float xDirection, float yDirection, float zDirection)
         {
-            Grenade newGrenade = new();
+            Grenade newGrenade = new Grenade();
             newGrenade.launcher = launcher;
             newGrenade.id = id;
             newGrenade.timer = DateTime.Now.AddSeconds(4);
-            NE_Physics newPhysics = new();
+            NE_Physics newPhysics = new NE_Physics();
             newGrenade.physics = newPhysics;
             newPhysics.oncollision = NE_OnCollision.NE_ColBounce;
 
@@ -128,7 +128,7 @@ namespace Counter_Strike_Server
         /// <param name="index">Unsed</param>
         public void CreateWall(double xPos, double yPos, double zPos, double xSize, double ySize, double zSize, int Zone, int index)
         {
-            NE_Physics newPhysics = new();
+            NE_Physics newPhysics = new NE_Physics();
 
             newPhysics.oncollision = NE_OnCollision.NE_ColBounce;
             NE_PhysicsSetSizeI(newPhysics, (int)(xSize * 8192), (int)(ySize * 8192), (int)(zSize * 8192));
@@ -694,11 +694,11 @@ namespace Counter_Strike_Server
             CreateStairs(-23.845, -22.226, -26.263, -25.927, 6.052, 6.439, 0, 30);
         }
 
-        public List<Stairs> AllStairsRef = new();
+        public List<Stairs> AllStairsRef = new List<Stairs>();
 
         public void CreateStairs(double xSideA, double xSideB, double zSideA, double zSideB, double startY, double endY, int direction, int index)
         {
-            Stairs newStairs = new()
+            Stairs newStairs = new Stairs()
             {
                 xSideA = (float)xSideA,
                 xSideB = (float)xSideB,

@@ -26,14 +26,14 @@ namespace Counter_Strike_Server
     public static class PartyManager
     {
         //Party settings
-        public static List<Party> allParties = new();
-        public static Dictionary<string, Party> partiesWithCode = new();
-        public static List<PartyModeData> allPartyModesData = new();
+        public static List<Party> allParties = new List<Party>();
+        public static Dictionary<string, Party> partiesWithCode = new Dictionary<string, Party>();
+        public static List<PartyModeData> allPartyModesData = new List<PartyModeData>();
 
         //All timer values
         public static DateTime roundChangeTime = new DateTime(2000, 1, 1, 0, 0, 0).AddSeconds(-1);
-        public static DateTime quitPartyTime = new(2000, 1, 1, 0, 0, 20);
-        public static DateTime startFullPartyWaitingTime = new(2000, 1, 1, 0, 0, 10);
+        public static DateTime quitPartyTime = new DateTime(2000, 1, 1, 0, 0, 20);
+        public static DateTime startFullPartyWaitingTime = new DateTime(2000, 1, 1, 0, 0, 10);
 
         public enum TextEnum
         {
@@ -150,7 +150,7 @@ namespace Counter_Strike_Server
                                             client.health -= (int)Program.Map(Distance, 0.3, 19, 200, 0);
                                             client.CheckAfterDamage(null, false, false);
 
-                                            Thread TimedCallThread = new(() =>
+                                            Thread TimedCallThread = new Thread(() =>
                                             {
                                                 Thread.Sleep(1000);
                                                 client.communicator.SendHealth();
@@ -314,7 +314,7 @@ namespace Counter_Strike_Server
             } while (!passwordOk);
 
             //Create new party
-            Party NewParty = new();
+            Party NewParty = new Party();
             NewParty.allConnectedClients.Add(currentClient);
             NewParty.partyMode = allPartyModesData[0];
             NewParty.partyTimer = NewParty.partyMode.trainingTime;

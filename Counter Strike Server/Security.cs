@@ -10,7 +10,7 @@ namespace Counter_Strike_Server
 {
     static class Security
     {
-        static readonly Random rand = new ();
+        private static readonly Random rand = new Random();
 
         /// <summary>
         /// Verify the final client key by generating the final key on the server.

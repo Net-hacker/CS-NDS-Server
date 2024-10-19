@@ -12,7 +12,7 @@ namespace Counter_Strike_Server
 {
     static class PhysicsManager
     {
-        public static Physics physicsEngine = new();
+        public static Physics physicsEngine = new Physics();
 
         /// <summary>
         /// Check physics for grenades

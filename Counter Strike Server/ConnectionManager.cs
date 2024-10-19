@@ -22,14 +22,14 @@ namespace Counter_Strike_Server
         public static int totalConnection = 0;
 
         //Clients informations
-        public static List<Client> allClients = new();
+        public static List<Client> allClients = new List<Client>();
 
 
-        public static List<string> bannedIps = new();
-        public static List<string> bannedMac = new();
+        public static List<string> bannedIps = new List<string>();
+        public static List<string> bannedMac = new List<string>();
 
-        public static List<string> connectedIps = new();
-        public static List<int> connectionCount = new();
+        public static List<string> connectedIps = new List<string>();
+        public static List<int> connectionCount = new List<int>();
 
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Counter_Strike_Server
             string ServerIp = "";
 
             //Create a socket to get the server ip
-            using (Socket socket = new (AddressFamily.InterNetwork, SocketType.Dgram, 0))
+            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
             {
                 socket.Connect("8.8.8.8", 65530);
                 IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
@@ -60,23 +60,23 @@ namespace Counter_Strike_Server
             server.Start();
 
             //Start thread for party timer system
-            Thread TimerThread = new (new ThreadStart(PartyManager.PartyTimerTick));
+            Thread TimerThread = new Thread(new ThreadStart(PartyManager.PartyTimerTick));
             TimerThread.Start();
 
             //Start thread to send ping requests to players
-            Thread PingThread = new (new ThreadStart(NetworkDataManager.Ping));
+            Thread PingThread = new Thread(new ThreadStart(NetworkDataManager.Ping));
             PingThread.Start();
 
             //Start thread to send ping requests to players
-            Thread PhysicsThread = new (new ThreadStart(PhysicsManager.CheckPhysics));
+            Thread PhysicsThread = new Thread(new ThreadStart(PhysicsManager.CheckPhysics));
             PhysicsThread.Start();
 
             //Start thread to check for incoming client data
-            Thread ReadThread = new (new ThreadStart(NetworkDataManager.CheckForClientData));
+            Thread ReadThread = new Thread(new ThreadStart(NetworkDataManager.CheckForClientData));
             ReadThread.Start();
 
             //Start thread to check for incoming new client
-            Thread CheckForClientThread = new (new ThreadStart(CheckForNewClient));
+            Thread CheckForClientThread = new Thread(new ThreadStart(CheckForNewClient));
             CheckForClientThread.Start();
 
             UserInterfaceManager.PrintFirstMessage(ServerIp, serverPort);
@@ -109,7 +109,7 @@ namespace Counter_Strike_Server
 
                 //NetworkDataManager.PrintMessage($"COUNT {totalConnection}");
                 //Get client connections
-                Client NewClient = new()
+                Client NewClient = new Client()
                 {
                     currentClientTcp = client,
                     currentClientStream = client.GetStream()

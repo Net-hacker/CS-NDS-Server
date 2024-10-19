@@ -44,10 +44,10 @@ namespace Counter_Strike_Server
         public Inventory inventory;
 
         public bool needRespawn;
-        public DateTime respawnTimer = new(2000, 1, 1, 0, 0, 0);
+        public DateTime respawnTimer = new DateTime(2000, 1, 1, 0, 0, 0);
         public int positionErrorCount = 0;
         public Party party;
-        public Vector3Int position = new(0, -100 * 4096, 0);
+        public Vector3Int position = new Vector3Int(0, -100 * 4096, 0);
         public int angle = 0;
         public float cameraAngle = 128;
         public bool wantStartNow = false;
@@ -58,8 +58,8 @@ namespace Counter_Strike_Server
 
         public Client()
         {
-            inventory = new(this);
-            communicator = new(this);
+            inventory = new Inventory(this);
+            communicator = new ClientCommunicator(this);
         }
 
         #region Position management
@@ -129,7 +129,7 @@ namespace Counter_Strike_Server
             if (!isDead && team != TeamEnum.SPECTATOR && party.roundState != RoundState.WAIT_START)
             {
                 //Parse data
-                Vector3Int newPos = new(int.Parse(xPos), int.Parse(yPos), int.Parse(zPos));
+                Vector3Int newPos = new Vector3Int(int.Parse(xPos), int.Parse(yPos), int.Parse(zPos));
                 this.angle = int.Parse(angle);
 
                 //Get camera angle

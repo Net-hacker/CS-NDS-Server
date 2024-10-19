@@ -11,7 +11,7 @@ namespace Counter_Strike_Server
 {
     static class ShopManager
     {
-        public static List<ShopElement> allShopElements = new();
+        public static List<ShopElement> allShopElements = new List<ShopElement>();
 
         public const int SHOP_GUN_COUNT = 25;
         public const int SHOP_GRENADE_COUNT = 3;

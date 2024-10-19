@@ -18,8 +18,9 @@ namespace Counter_Strike_Server
         private Call(string data)
         {
             this.data = data;
+            allClientsDestination = new List<Client>();
         }
-        private List<Client> allClientsDestination = new ();
+        private List<Client> allClientsDestination;
         private string data;
 
         #region Call creation
@@ -31,7 +32,7 @@ namespace Counter_Strike_Server
         /// <param name="Destination">Receiver</param>
         public static void Create(string Data, Client Destination)
         {
-            Call NewCall = new(Data);
+            Call NewCall = new Call(Data);
             NewCall.allClientsDestination.Add(Destination);
             Send(NewCall);
         }
@@ -43,7 +44,7 @@ namespace Counter_Strike_Server
         /// <param name="Destinations">Receivers</param>
         public static void Create(string Data, List<Client> Destinations)
         {
-            Call NewCall = new(Data);
+            Call NewCall = new Call(Data);
             NewCall.allClientsDestination.AddRange(Destinations);
             Send(NewCall);
         }
@@ -56,7 +57,7 @@ namespace Counter_Strike_Server
         /// <param name="DestinationToRemove">Receiver to remove</param>
         public static void Create(string Data, List<Client> Destinations, Client DestinationToRemove)
         {
-            Call NewCall = new(Data);
+            Call NewCall = new Call(Data);
             NewCall.allClientsDestination.AddRange(Destinations);
             NewCall.allClientsDestination.Remove(DestinationToRemove);
             Send(NewCall);
@@ -70,7 +71,7 @@ namespace Counter_Strike_Server
         /// <param name="callToSend">Call to send</param>
         private static void Send(Call callToSend)
         {
-            byte[] msg = new List<byte>(Encoding.ASCII.GetBytes("{" + callToSend.data + "}")).ToArray();
+            byte[] msg = Encoding.ASCII.GetBytes("{" + callToSend.data + "}");
             int clientCount = callToSend.allClientsDestination.Count;
 
             for (int clientIndex = 0; clientIndex < clientCount; clientIndex++)

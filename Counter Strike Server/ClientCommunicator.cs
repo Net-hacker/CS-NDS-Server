@@ -125,7 +125,7 @@ namespace Counter_Strike_Server
                 Call.Create($"SETCODE;{client.party.password}", client);
 
             //Send all party's clients ID to new client
-            StringBuilder NewCallData = new();
+            StringBuilder NewCallData = new StringBuilder();
 
             NewCallData.Append("ADDRANGE;");
             for (int ClientI = 0; ClientI < client.party.allConnectedClients.Count; ClientI++)
