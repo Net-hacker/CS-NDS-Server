@@ -14,7 +14,7 @@ This Project builds on [This Project](https://github.com/Fewnity/Counter-Strike-
 
 ### For Linux :
 - Install [Mono](https://www.mono-project.com/)
-- Run the **make.bat** in the project folder
+- Run the **make.sh** in the project folder
 
 Note : To avoid coding collisions, path finding..., there is an Unity project to export code : https://github.com/Fewnity/Counter-Strike-DS-Unity-Project
 
